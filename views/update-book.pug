@@ -9,7 +9,7 @@ block content
             each error in errors
                 li=error.message
 
-    form(action="/books", method="post")
+    form(action=`/books/${book.id}`, method="post")
         p
             label(for='title') Title
             input#title(name='title', type='text', value=book.title)
@@ -27,6 +27,6 @@ block content
         p
             a.button(href='/') Cancel
         p
-            a.button(href='/') Delete Book
+            a.button(href=`/books/${book.id}/delete`) Delete Book
 
             

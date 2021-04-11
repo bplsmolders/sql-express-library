@@ -2,6 +2,8 @@ var express = require('express');
 var router = express.Router();
 const { sequelize } = require('../models');
 const {Book}  = sequelize.models;
+const { Op } = sequelize.Sequelize;
+
 
 /* Handler function to wrap each route. */
 function asyncHandler(cb){
@@ -15,15 +17,64 @@ function asyncHandler(cb){
   }
 }
 
+/* Underneath pages both goes to the first page of all books */
 router.get('/', (req, res, next) => {
-  res.redirect("/books")
+  res.redirect("/books/page/1")
 });
 
-/* shows the full list of books */
-router.get('/books', asyncHandler(async (req, res) => {
-  const books = await Book.findAll({ order: [[ "createdAt", "DESC" ]] })
-  res.render('all-books', {title: 'Books', books})
-    // res.json(books)
+router.get('/books', (req, res, next) => {
+  res.redirect("/books/page/1")
+});
+
+
+/* Shows partial list of books based on pagination*/
+router.get('/books/page/:page', asyncHandler(async (req, res) => {
+  let page = req.params.page
+  let amountPerPage = 5
+  let offset = (page-1) * amountPerPage;
+
+  const pageBooks = await Book.findAll({
+    offset,
+    limit: amountPerPage
+  });
+  const allBooks = await Book.findAll({});
+
+
+  amountOfPages= Math.ceil(allBooks.length / amountPerPage);
+  res.render('index', {amountOfPages, search: {}, title: 'Books', pageBooks })
+}));
+
+/* Applies filter on books when Searched. */
+router.post('/books', asyncHandler(async (req, res) => {
+  let searchterm = req.body.search;
+  const books = await Book.findAll({
+    where: {
+      [Op.or]:[
+          {  
+            title: {
+                  [Op.substring]: searchterm
+            }
+          },
+          { 
+            author: {
+              [Op.substring]: searchterm
+            }, 
+          },
+          { 
+            genre: {
+              [Op.substring]: searchterm
+            }, 
+          },
+          { 
+            year: {
+              [Op.substring]: searchterm
+            }, 
+          }
+      ]
+    }
+  })
+  res.render('searchresults', {search: {}, title: 'Books', books})
+  res.json(search)
 }));
 
 /* shows the create new book form. */
@@ -32,12 +83,11 @@ router.get('/books/new', asyncHandler(async (req, res) => {
 }));
 
 /* Posts a new book to the database. */
-router.post('/', asyncHandler(async (req, res) => {
+router.post('/books/new', asyncHandler(async (req, res) => {
   let book;
-  console.log(req.body)
   try {
     book = await Book.create(req.body);
-    res.redirect("/book/" + book.id);
+    res.redirect("/books/page/1");
   } catch (error) {
     if(error.name === "SequelizeValidationError") { // checking the error
       book = await Book.build(req.body);
@@ -58,14 +108,14 @@ router.get('/books/:id', asyncHandler(async (req, res) => {
   }
 }));
 
-// /* Updates book info in the database. */
+/* Updates book info in the database. */
 router.post('/books/:id', asyncHandler(async (req, res) => {
   let book;
   try {
     book = await Book.findByPk(req.params.id);
     if(book) {
       await book.update(req.body);
-      res.redirect("/books/" + book.id); 
+      res.redirect("/books/page/1"); 
     } else {
       res.sendStatus(404);
     }
@@ -80,11 +130,26 @@ router.post('/books/:id', asyncHandler(async (req, res) => {
   }
 }));
 
-// /* Deletes a book out of the database */
-// router.post('/books/:id/delete', asyncHandler(async (req, res) => {
-//   const books = await Book.findAll({ order: [[ "createdAt", "DESC" ]] })
-//   res.json(books)
-// }));
+/* Deletes a book out of the database */
+router.get('/books/:id/delete', asyncHandler(async (req, res) => {
+  const book = await Book.findByPk(req.params.id);
+  if(book) {
+    res.render("delete", { book, title: "Delete Book" });
+  } else {
+    res.sendStatus(404);
+  }
+}));
+
+/* Delete individual article. */
+router.post('/books/:id/delete', asyncHandler(async (req ,res) => {
+  const book = await Book.findByPk(req.params.id);
+  if(book) {
+    await book.destroy();
+    res.redirect("/");
+  } else {
+    res.sendStatus(404);
+  }
+}));
 
 
 module.exports = router;
