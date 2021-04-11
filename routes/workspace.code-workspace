@@ -1,0 +1,16 @@
+{
+	"folders": [
+		{
+			"name": "public",
+			"path": "../../../../Downloads/sql_library_manager-v1 (1)/public"
+		},
+		{
+			"name": "sql-express-library",
+			"path": ".."
+		},
+		{
+			"path": "../../../../Downloads/sql_library_manager-v1 (1) 2/example-markup"
+		}
+	],
+	"settings": {}
+}
