@@ -1,7 +1,7 @@
 extends layout
 
 block content
-    h1= title
+    h1.block= title
     
     if(errors)
         h2.errors Oops an error occurred!
@@ -9,7 +9,7 @@ block content
             each error in errors
                 li=error.message
 
-    form(action=`/books/${book.id}`, method="post")
+    form.container(action=`/books/${book.id}`, method="post")
         p
             label(for='title') Title
             input#title(name='title', type='text', value=book.title)
@@ -26,7 +26,7 @@ block content
             input(type='submit', value='Update Book')
         p
             a.button(href='/') Cancel
-        p
-            a.button(href=`/books/${book.id}/delete`) Delete Book
+        
+            a.buttonsearch(href=`/books/${book.id}/delete`) Delete Book
 
             

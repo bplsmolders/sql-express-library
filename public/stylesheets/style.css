@@ -1,41 +1,123 @@
 body {
+  background-image: url(../images/background.jpg);
+  background-size: 100%;
   padding: 10px 50px 50px;
   font: 18px "Garamond", serif;
 }
 
+#container{
+  width: 1200px;
+}
+
 a {
-  color: #019875;
+  color: black;
   text-decoration: none;
   font-weight: bold;
   transition: 0.4s;
 }
 
-  a:hover {
-    color: black;
-  }
+a:hover {
+  color: black;
+}
+
 
 a.button, input[type=submit] {
+  margin-top:10px;
+  color: black;
+  background: #BF7330;
   color: white;
-  background: #019875;
   font-family: "Lucida Grande", Helvetica, Arial, sans-serif;
   padding: 10px 14px 12px;
-  font-size: 14px;
+  font-size: 18px;
   border-radius: 2px;
   cursor: pointer;
 }
 
+#create{
+  float:left;
+  margin-top: 95px;
+  margin-left: 40px;
+}
+
+.search{
+  display:inline-block;
+  margin-top: 67px;
+  margin-left: 60px;
+}
+
+.search p{
+  display: inline-block; 
+  margin-left: 0px;
+  vertical-align: center;
+}
+
+.buttonsearch{
+  background: #BF7330;
+  color:white;
+  font-family: "Lucida Grande", Helvetica, Arial, sans-serif;
+  padding: 10px 14px 12px;
+  font-size: 18px;
+  border-radius: 2px;
+  cursor: pointer;
+  margin-left: 10px;
+  vertical-align: center;
+}
+
+.buttonsearch:hover{
+  background: #BFAC95;
+}
+
+
+/* everything for the pagination buttons */
+nav {
+  display: flex;
+  margin-left: 5vw;
+  margin-top: 10px;
+}
+
+nav li{
+  list-style: none;
+  float: left;
+  margin-left: 5px;
+  margin-right: 5px;
+  padding: 5px 10px;
+  text-decoration: none;
+  background: #BF7330; 
+}
+nav li:hover{
+  background-color: #BFAC95;
+  color: black
+}
+
+.pagination{
+  font-size: 20px;
+  color:white;
+}
+.pagination:hover{
+  color:black;
+}
+
 form a.button, input[type=submit] {
+  font-weight: bold;
+  margin-top: 5px;
   margin-left: 140px;
   transition: 0.4s;
 }
+
+form.container a.button{
+  margin-top: 10px;
+}
+
+
 
 input[type=submit] {
   border: 0;
 }
 
-  a.button:hover, input[type=submit]:hover {
-    background-color: #01b189;
-  }
+a.button:hover, input[type=submit]:hover {
+  background-color: #BFAC95;
+  color: black;
+}
 
 p {
   margin: 20px auto;
@@ -48,27 +130,112 @@ ul {
   line-height: 1.3em;
 }
 
+h1{
+  margin-left: 5vw;
+  float:left;
+  color: white;
+  font-size: 80px;
+}
+
 h2 {
   border-top: 2px solid #e7e7e7;
+  color: white;
   padding-top: 20px;
 }
 
+/* table css */
+table{
+  margin-left: 5vw;
+  border-spacing: 1; 
+  border-collapse: collapse; 
+  border-radius:6px;
+  overflow:hidden;
+  width:100%; 
+  display: block;
+  position:relative;
+}
+
+thead tr        { 
+  height:80px;
+  background:#BF7330;
+  font-size:40px;
+  font-weight: bold;
+}
+
 th {
+  color: white;
   border-bottom: 2px solid #D8B493;
   text-align: left;
   padding: 5px 20px 5px 10px;
 }
 
 tr {
-  min-height: 50px;
+  background-color: white;
+  font-size: 25px;
+  height: 60px;
 }
+
+tbody tr:hover{
+  background:#BFAC95;
+  padding-top: 50px;
+}
+
 
 tr:nth-child(2n) {
   background: #E7E7E7;
+  height: 60px;
+  border-bottom:1px solid #E3F1D5 ;
 }
+
+tbody tr:hover:nth-child(2n) {
+  background:#BFAC95;
+}
+
 
 td {
   padding: 5px 20px 5px 10px;
+}
+
+/* container form */
+.block {
+  display: block;
+  width: 1200px
+}
+
+.container{
+  margin-left: 5vw;
+  padding: 20px;
+  background: #181626;
+  display: inline-block;
+  color: white;
+  border-width: 20px;
+  border-style:solid;
+  border-color: white;
+}
+
+.errorcontainer{
+  margin-left: 5vw;
+  margin-bottom: 20px;
+  padding: 20px;
+  background: #D93D4A;
+  display: inline-block;
+  color: white;
+  border-width: 5px;
+  border-style: dotted;
+  border-color: white;
+  vertical-align:top;
+}
+
+
+/* container delete form  */
+.containerleft{
+  padding: 20px;
+  background: #181626;
+  display: inline-block;
+  color: white;
+  border-width: 20px;
+  border-style:solid;
+  border-color: white;
 }
 
 label {
@@ -95,3 +262,4 @@ input[type=text] {
 .error {
   color: rgb(236, 15, 15);
 }
+

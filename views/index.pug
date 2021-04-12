@@ -1,15 +1,16 @@
 extends layout
 
 block content
-    h1= title
-    p 
-        a.button(href='/books/new') Create New Book
-  
-    form(action=`/books`, method="post")
-        p
-            input#search(name='search', type='text', placeholder='Search...', value=search.search )
-        p
-            a.button(type='submit', value='search') Search
+    div#container
+        h1= title
+        p#create 
+            a.button(href='/books/new') Create New Book
+    
+        form.search(action=`/books`, method="post")
+            p
+                input(name='search', type='text', placeholder='Search...', value=search.search )
+            p
+                a.buttonsearch(type='submit', value='search') Search Book
 
     table
         thead 
@@ -35,5 +36,5 @@ block content
         while n < amountOfPages
             - ++n
             li
-                a(href=`/books/page/${n}`)= n
+                a.pagination(href=`/books/page/${n}`)= n
 
