@@ -24,7 +24,7 @@ a:hover {
 a.button, input[type=submit] {
   margin-top:10px;
   color: black;
-  background: #BF7330;
+  background: #181626;
   color: white;
   font-family: "Lucida Grande", Helvetica, Arial, sans-serif;
   padding: 10px 14px 12px;
@@ -52,7 +52,7 @@ a.button, input[type=submit] {
 }
 
 .buttonsearch{
-  background: #BF7330;
+  background: #181626;
   color:white;
   font-family: "Lucida Grande", Helvetica, Arial, sans-serif;
   padding: 10px 14px 12px;
@@ -82,7 +82,7 @@ nav li{
   margin-right: 5px;
   padding: 5px 10px;
   text-decoration: none;
-  background: #BF7330; 
+  background: #181626; 
 }
 nav li:hover{
   background-color: #BFAC95;
@@ -157,7 +157,7 @@ table{
 
 thead tr        { 
   height:80px;
-  background:#BF7330;
+  background:#181626;
   font-size:40px;
   font-weight: bold;
 }
