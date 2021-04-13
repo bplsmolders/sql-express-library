@@ -104,7 +104,10 @@ router.get('/books/:id', asyncHandler(async (req, res) => {
   if(book){
     res.render("update-book", { book, title: book.title })
   } else {
-    res.sendStatus(404);
+    let error = new Error
+    error.status=404
+    // err.message = 'looks like the page you requested does not exist'
+    throw error;
   }
 }));
 
@@ -121,9 +124,8 @@ router.post('/books/:id', asyncHandler(async (req, res) => {
     }
   } catch (error) {
     if(error.name === "SequelizeValidationError") {
-      book = await Books.build(req.body);
-      book.id = req.params.id; // makes sure correct book gets updated
-      res.render("update-book", { book, errors: error.errors, title: "Edit Article" })
+      book = await Book.build(req.body);
+      res.render("new-book", { book, errors: error.errors, title: "New Book" })
     } else {
       throw error;
     }
