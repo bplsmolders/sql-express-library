@@ -5,6 +5,9 @@
   "scripts": {
     "start": "npx nodemon ./bin/www"
   },
+  "engines":{
+    "node": "15.12.0"
+  },
   "dependencies": {
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
